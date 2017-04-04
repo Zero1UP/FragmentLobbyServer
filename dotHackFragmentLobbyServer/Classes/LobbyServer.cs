@@ -15,9 +15,9 @@ namespace dotHackFragmentLobbyServer
         public static bool _proxyMopde = false;
         public static string proxyIP;
         public static readonly object _sync = new object();
-        public static List<GameClient> clients;
-        public static List<ProxyClient> proxies;
-        public static List<LobbyChatRoom> lobbyChatRooms;
+        //public static List<GameClient> clients;
+        //public static List<ProxyClient> proxies;
+        //public static List<LobbyChatRoom> lobbyChatRooms;
         public static TcpListener listener;
 
 

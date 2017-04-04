@@ -27,25 +27,6 @@ namespace dotHackFragmentLobbyServer
             frm_Settings.Show();
         }
 
-
-
-        // Checks our current Server settings
-        private Boolean  CheckSettingsFile()
-        {
-            string dataBaseType = Properties.Settings.Default.dataBaseType;
-            string connString = Properties.Settings.Default.connString;
-            string databaseFilePath = Properties.Settings.Default.databaseFilePath;
-            string IPAddress = Properties.Settings.Default.IPAddress;
-            int Port = Properties.Settings.Default.Port;
-
-            if (dataBaseType == "" || connString =="" || IPAddress == "" || Port == 0){return false;}
-
-            if(dataBaseType !="" && databaseFilePath ==""){ return false;}
-
-            return true;
-        }
-
-
         #region Form Events
 
         private void frm_Main_Load(object sender, EventArgs e)
@@ -55,8 +36,9 @@ namespace dotHackFragmentLobbyServer
         }
         private void frm_Main_Shown(object sender, EventArgs e)
         {
-            //Display the settings form if it returns false
-            applicationSettings = true; //CheckSettingsFile();
+            //If the server is not currently configured then we need to display the settings window to the user as a first time setup.
+            //This form has the options to set the server IP, port number and database information
+            applicationSettings = Classes.ApplicationSettings.CheckSettings();
             if (applicationSettings == false)
             {
                 Form frm_Settings = new frm_Settings();
