@@ -8,32 +8,43 @@ namespace dotHackFragmentLobbyServer.Classes
 {
    public static class ApplicationSettings
     {
-        static string dataBaseType = Properties.Settings.Default.dataBaseType;
-        static string connString = Properties.Settings.Default.connString;
-        static string databaseFilePath = Properties.Settings.Default.databaseFilePath;
-        static string ipAddress = Properties.Settings.Default.IPAddress;
-        static int port = Properties.Settings.Default.Port;
-        
+        public readonly static string dataBaseType = Properties.Settings.Default.dataBaseType;
+        public readonly static string connString = Properties.Settings.Default.connString;
+        public readonly static string ipAddress = Properties.Settings.Default.IPAddress;
+        public readonly static int port = Properties.Settings.Default.Port;
+        public readonly static string hostName = Properties.Settings.Default.HostName;
+        public readonly static string userName = Properties.Settings.Default.UserName;
+        public readonly static string passWord = Properties.Settings.Default.PassWord;
   
 
-        //Build our constructor
+        
         public static Boolean CheckSettings ()
         {
-            if (dataBaseType == "" || connString == "" || ipAddress == "" || port == 0) { return false; }
-
-            if (dataBaseType != "" && databaseFilePath == "") { return false; }
+           
+            if (dataBaseType =="" || hostName =="" || userName =="" || passWord == "" || ipAddress=="" || port == 0) { return false; }
 
             return true;
 
         }
 
-        public static void SaveSettings(string dataBaseType,string connString,string databaseFilePath,string ipAddress,int port)
+        public static void SaveSettings(string dataBaseType,string ipAddress,int port,string hostName, string userName, string passWord)
         {
             Properties.Settings.Default.dataBaseType = dataBaseType;
-            Properties.Settings.Default.connString = connString;
-            Properties.Settings.Default.databaseFilePath = databaseFilePath;
+
+            //Build our connection string based on the information we got back from the user
+            if (dataBaseType == "MSSQL")
+            {
+                Properties.Settings.Default.connString = "Server=" + hostName + ";Database=Fragment;User Id="+ userName + ";Password=" + passWord + "; ";
+            } else if(dataBaseType == "MYSQL")
+            {
+                Properties.Settings.Default.connString = "Server=" + hostName + ";Database=Fragment;Uid=" + userName + ";Pwd=" + passWord + "; ";
+            }
+         
             Properties.Settings.Default.IPAddress = ipAddress;
             Properties.Settings.Default.Port = port;
+            Properties.Settings.Default.HostName = hostName;
+            Properties.Settings.Default.UserName = userName;
+            Properties.Settings.Default.PassWord = passWord; 
             Properties.Settings.Default.Save();
         }
 
@@ -41,12 +52,12 @@ namespace dotHackFragmentLobbyServer.Classes
         {
             ArrayList settings = new ArrayList();
 
-            settings.Add(Properties.Settings.Default.dataBaseType);
-            settings.Add(Properties.Settings.Default.connString);
-            settings.Add(Properties.Settings.Default.databaseFilePath);
-            settings.Add(Properties.Settings.Default.IPAddress);
-            settings.Add(Properties.Settings.Default.Port);
-
+            settings.Add(dataBaseType);
+            settings.Add(ipAddress);
+            settings.Add(port);
+            settings.Add(hostName);
+            settings.Add(userName);
+            settings.Add(passWord);
             return settings;
         }
     }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.NetworkInformation;
 using System.Collections;
+
 namespace dotHackFragmentLobbyServer
 {
     public partial class frm_Settings : Form
@@ -58,24 +59,55 @@ namespace dotHackFragmentLobbyServer
             if (settings[0].ToString() == "MYSQL") { rdo_MYSQL.Checked = true; }
             if (settings[0].ToString() == "SQLITE") { rdo_SQLITE.Checked = true; }
 
-            //connstring
-            //databaseFilePath
-            cmb_IPSelection.SelectedItem = settings[3].ToString();
-            num_Port.Value = decimal.Parse( settings[4].ToString());
+            cmb_IPSelection.SelectedItem = settings[1].ToString();
+            num_Port.Value = decimal.Parse( settings[2].ToString());
+            txt_HostName.Text = settings[3].ToString();
+            txt_UserName.Text = settings[4].ToString();
+            txt_PassWord.Text = settings[5].ToString();
         }
         private void btn_Save_Click(object sender, EventArgs e)
         {
             string dbEngine ="";
+            string validationReturn;
             int selectedPort = 0;
 
             if (rdo_MSSQL.Checked) { dbEngine = "MSSQL"; }
             if (rdo_MYSQL.Checked) { dbEngine = "MYSQL"; }
             if (rdo_SQLITE.Checked) { dbEngine = "SQLITE"; }
-            int.TryParse( num_Port.Value.ToString(),out selectedPort );
+            int.TryParse( num_Port.Value.ToString(),out selectedPort ); //Need to convert this to an int because the numeric updown is a decimal
 
-            Classes.ApplicationSettings.SaveSettings(dbEngine, "", "", cmb_IPSelection.SelectedItem.ToString(), selectedPort);
+
+            validationReturn = ValidateSettings();
+            if (validationReturn =="")
+            {
+                Classes.ApplicationSettings.SaveSettings(dbEngine, cmb_IPSelection.SelectedItem.ToString(), selectedPort, txt_HostName.Text, txt_UserName.Text, txt_PassWord.Text);
+            }
+            else
+            {
+                MessageBox.Show(validationReturn);
+            }
+            
         }
 
+        private String ValidateSettings()
+        {
+            string errorMessage ="";
+            string[] splitIPV4 = cmb_IPSelection.SelectedItem.ToString().Split('.');
+            
+            if(splitIPV4.Length != 4) { errorMessage = "Please enter a valid IP Address for Server Info."; }
+            if(num_Port.Value == 0) { errorMessage += "\n Please enter a port higher than 0."; }
+            if(rdo_MSSQL.Checked ==false && rdo_MYSQL.Checked ==false && rdo_SQLITE.Checked == false) { errorMessage += "\n Please select a database engine."; }
+
+            //SQL Lite database does no require a user name or password so this check only applies to MSSQL and MYSQL
+            if (rdo_MSSQL.Checked ==true || rdo_MYSQL.Checked ==true)
+            {
+                if(txt_HostName.Text == "") { errorMessage += "\n Please enter a host name under Connection String."; }
+                if(txt_UserName.Text == "") { errorMessage += "\n Please enter a user name under Connection String."; }
+                if(txt_PassWord.Text == "") { errorMessage += "\n Please enter a pass word under Connection String."; }
+            }
+
+            return errorMessage;
+        }
     }
 
 
