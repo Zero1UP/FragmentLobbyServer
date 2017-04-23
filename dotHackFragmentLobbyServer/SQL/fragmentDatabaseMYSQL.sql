@@ -109,3 +109,101 @@ BEGIN
 	SELECT * FROM ServerInfo;
 END//
 DELIMITER ;
+
+-- Stored Procedure for getting the list of Lobbies
+DROP PROCEDURE IF EXISTS GetLobbies;
+DELIMITER //
+CREATE PROCEDURE GetLobbies   
+()
+BEGIN 
+	SELECT * FROM Lobbies;
+END//
+DELIMITER ;
+
+-- Stored Procedure for getting the list of information for all Characters
+DROP PROCEDURE IF EXISTS GetAllCharacterInformation;
+DELIMITER //
+CREATE PROCEDURE GetAllCharacterInformation
+()
+BEGIN
+	SELECT 
+			characterID,
+			characterName,
+			className,
+			characterLevel,
+			status,
+			guildName,
+			Notes
+	FROM 
+		Characters
+	JOIN
+		Classes
+	ON
+		Classes.classID = characters.classID
+	JOIN
+		guilds
+	ON
+		guilds.guildID =Characters.guildID;
+
+END//
+DELIMITER ;
+
+-- Stored Procedure for getting the list of information for a Characters
+DROP PROCEDURE IF EXISTS GetCharacterInformation;
+DELIMITER //
+CREATE PROCEDURE GetCharacterInformation
+(IN CharacterID int)
+BEGIN
+ 	SELECT 
+			characterID,
+			characterName,
+			className,
+			characterLevel,
+			status,
+			guildName,
+			Notes
+	FROM 
+		Characters
+	JOIN
+		Classes
+	ON
+		Classes.classID = characters.classID
+	JOIN
+		guilds
+	ON
+		guilds.guildID = Characters.guildID
+	WHERE 
+		CharacterID = CharacterID;
+END//
+DELIMITER ;
+
+-- Stored Procedure for getting a count of characters per class
+DROP PROCEDURE IF EXISTS GetClassCount;
+DELIMITER //
+CREATE PROCEDURE GetClassCount
+()
+BEGIN
+ 	SELECT 
+		className,
+		COUNT(characterID)
+	FROM
+		Classes
+	JOIN
+		Characters
+	ON
+		Classes.classID = Characters.classID
+	GROUP BY className;
+END//
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
+

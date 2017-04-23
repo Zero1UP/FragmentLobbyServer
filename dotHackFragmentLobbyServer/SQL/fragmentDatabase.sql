@@ -105,3 +105,89 @@ CREATE PROCEDURE GetServerInfo
  AS   
 	SELECT * FROM ServerInfo;
 GO
+
+--Stored Procedure for getting the list of Lobbies
+DROP PROCEDURE IF EXISTS GetLobbies;
+
+GO
+CREATE PROCEDURE GetLobbies   
+ 
+ AS   
+	SELECT * FROM Lobbies;
+GO
+
+--Stored Procedure for getting the list of information for all Characters
+DROP PROCEDURE IF EXISTS GetAllCharacterInformation;
+
+GO
+CREATE PROCEDURE GetAllCharacterInformation   
+ 
+ AS   
+	SELECT 
+			characterID,
+			characterName,
+			className,
+			characterLevel,
+			status,
+			guildName,
+			Notes
+	FROM 
+		Characters
+	JOIN
+		Classes
+	ON
+		Classes.classID = characters.classID
+	JOIN
+		guilds
+	ON
+		guilds.guildID = Characters.guildID;
+
+GO
+
+--Stored Procedure for getting the list of information for a Characters
+DROP PROCEDURE IF EXISTS GetCharacterInformation;
+
+GO
+CREATE PROCEDURE GetCharacterInformation   
+  @CharacterID int
+ AS   
+ 	SELECT 
+			characterID,
+			characterName,
+			className,
+			characterLevel,
+			status,
+			guildName,
+			Notes
+	FROM 
+		Characters
+	JOIN
+		Classes
+	ON
+		Classes.classID = characters.classID
+	JOIN
+		guilds
+	ON
+		guilds.guildID = Characters.guildID
+	WHERE 
+		CharacterID =@CharacterID;
+GO
+
+--Stored Procedure for getting a count of characters per class
+DROP PROCEDURE IF EXISTS GetClassCount;
+
+GO
+CREATE PROCEDURE GetClassCount   
+ 
+ AS   
+ 	SELECT 
+		className,
+		COUNT(characterID)
+	FROM
+		Classes
+	JOIN
+		Characters
+	ON
+		Classes.classID = Characters.classID
+	GROUP BY className;
+GO
