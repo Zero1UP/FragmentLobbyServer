@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.NetworkInformation;
 using System.Collections;
@@ -64,23 +57,25 @@ namespace dotHackFragmentLobbyServer
             txt_HostName.Text = settings[3].ToString();
             txt_UserName.Text = settings[4].ToString();
             txt_PassWord.Text = settings[5].ToString();
+            num_PingDelay.Value = decimal.Parse(settings[6].ToString());
         }
         private void btn_Save_Click(object sender, EventArgs e)
         {
             string dbEngine ="";
             string validationReturn;
             int selectedPort = 0;
+            int selectedPingDelay = 0;
 
             if (rdo_MSSQL.Checked) { dbEngine = "MSSQL"; }
             if (rdo_MYSQL.Checked) { dbEngine = "MYSQL"; }
             if (rdo_SQLITE.Checked) { dbEngine = "SQLITE"; }
             int.TryParse( num_Port.Value.ToString(),out selectedPort ); //Need to convert this to an int because the numeric updown is a decimal
-
+            int.TryParse(num_PingDelay.Value.ToString(), out selectedPingDelay);//Need to convert this to an int because the numeric updown is a decimal
 
             validationReturn = ValidateSettings();
             if (validationReturn =="")
             {
-                Classes.ApplicationSettings.SaveSettings(dbEngine, cmb_IPSelection.SelectedItem.ToString(), selectedPort, txt_HostName.Text, txt_UserName.Text, txt_PassWord.Text);
+                Classes.ApplicationSettings.SaveSettings(dbEngine, cmb_IPSelection.SelectedItem.ToString(), selectedPort, txt_HostName.Text, txt_UserName.Text, txt_PassWord.Text, selectedPingDelay);
             }
             else
             {

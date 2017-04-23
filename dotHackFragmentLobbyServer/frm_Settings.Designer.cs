@@ -33,22 +33,25 @@
             this.rdo_MYSQL = new System.Windows.Forms.RadioButton();
             this.rdo_MSSQL = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.cmb_IPSelection = new System.Windows.Forms.ComboBox();
             this.num_Port = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Save = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txt_HostName = new System.Windows.Forms.TextBox();
-            this.txt_UserName = new System.Windows.Forms.TextBox();
             this.txt_PassWord = new System.Windows.Forms.TextBox();
+            this.txt_UserName = new System.Windows.Forms.TextBox();
+            this.txt_HostName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.num_PingDelay = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_Port)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_PingDelay)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -56,7 +59,7 @@
             this.groupBox1.Controls.Add(this.rdo_SQLITE);
             this.groupBox1.Controls.Add(this.rdo_MYSQL);
             this.groupBox1.Controls.Add(this.rdo_MSSQL);
-            this.groupBox1.Location = new System.Drawing.Point(2, 88);
+            this.groupBox1.Location = new System.Drawing.Point(2, 131);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(103, 139);
             this.groupBox1.TabIndex = 1;
@@ -95,16 +98,27 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.num_PingDelay);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.cmb_IPSelection);
             this.groupBox2.Controls.Add(this.num_Port);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(2, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(223, 70);
+            this.groupBox2.Size = new System.Drawing.Size(223, 92);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Server Info";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 68);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Ping Delay";
             // 
             // cmb_IPSelection
             // 
@@ -138,7 +152,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Location = new System.Drawing.Point(8, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 0;
@@ -146,7 +160,7 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(2, 247);
+            this.btn_Save.Location = new System.Drawing.Point(2, 290);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(216, 23);
             this.btn_Save.TabIndex = 8;
@@ -162,30 +176,34 @@
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Location = new System.Drawing.Point(112, 88);
+            this.groupBox3.Location = new System.Drawing.Point(112, 131);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(113, 138);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Connection String";
             // 
-            // label3
+            // txt_PassWord
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Host Name";
+            this.txt_PassWord.Location = new System.Drawing.Point(9, 112);
+            this.txt_PassWord.Name = "txt_PassWord";
+            this.txt_PassWord.PasswordChar = '*';
+            this.txt_PassWord.Size = new System.Drawing.Size(96, 20);
+            this.txt_PassWord.TabIndex = 2;
             // 
-            // label4
+            // txt_UserName
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 60);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "User Name";
+            this.txt_UserName.Location = new System.Drawing.Point(9, 76);
+            this.txt_UserName.Name = "txt_UserName";
+            this.txt_UserName.Size = new System.Drawing.Size(96, 20);
+            this.txt_UserName.TabIndex = 1;
+            // 
+            // txt_HostName
+            // 
+            this.txt_HostName.Location = new System.Drawing.Point(10, 37);
+            this.txt_HostName.Name = "txt_HostName";
+            this.txt_HostName.Size = new System.Drawing.Size(96, 20);
+            this.txt_HostName.TabIndex = 0;
             // 
             // label5
             // 
@@ -196,33 +214,41 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Password";
             // 
-            // txt_HostName
+            // label4
             // 
-            this.txt_HostName.Location = new System.Drawing.Point(10, 37);
-            this.txt_HostName.Name = "txt_HostName";
-            this.txt_HostName.Size = new System.Drawing.Size(96, 20);
-            this.txt_HostName.TabIndex = 0;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "User Name";
             // 
-            // txt_UserName
+            // label3
             // 
-            this.txt_UserName.Location = new System.Drawing.Point(9, 76);
-            this.txt_UserName.Name = "txt_UserName";
-            this.txt_UserName.Size = new System.Drawing.Size(96, 20);
-            this.txt_UserName.TabIndex = 1;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Host Name";
             // 
-            // txt_PassWord
+            // num_PingDelay
             // 
-            this.txt_PassWord.Location = new System.Drawing.Point(9, 112);
-            this.txt_PassWord.Name = "txt_PassWord";
-            this.txt_PassWord.PasswordChar = '*';
-            this.txt_PassWord.Size = new System.Drawing.Size(96, 20);
-            this.txt_PassWord.TabIndex = 2;
+            this.num_PingDelay.Location = new System.Drawing.Point(78, 66);
+            this.num_PingDelay.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.num_PingDelay.Name = "num_PingDelay";
+            this.num_PingDelay.Size = new System.Drawing.Size(120, 20);
+            this.num_PingDelay.TabIndex = 4;
             // 
             // frm_Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(252, 282);
+            this.ClientSize = new System.Drawing.Size(252, 338);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.groupBox1);
@@ -236,6 +262,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_Port)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_PingDelay)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -258,5 +285,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown num_PingDelay;
     }
 }

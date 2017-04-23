@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections;
 namespace dotHackFragmentLobbyServer.Classes
 {
@@ -15,9 +11,9 @@ namespace dotHackFragmentLobbyServer.Classes
         public readonly static string hostName = Properties.Settings.Default.HostName;
         public readonly static string userName = Properties.Settings.Default.UserName;
         public readonly static string passWord = Properties.Settings.Default.PassWord;
-  
+        public readonly static int pingDelay = Properties.Settings.Default.pingDelay;
 
-        
+
         public static Boolean CheckSettings ()
         {
            
@@ -27,7 +23,7 @@ namespace dotHackFragmentLobbyServer.Classes
 
         }
 
-        public static void SaveSettings(string dataBaseType,string ipAddress,int port,string hostName, string userName, string passWord)
+        public static void SaveSettings(string dataBaseType,string ipAddress,int port,string hostName, string userName, string passWord,int pingDelay)
         {
             Properties.Settings.Default.dataBaseType = dataBaseType;
 
@@ -44,7 +40,8 @@ namespace dotHackFragmentLobbyServer.Classes
             Properties.Settings.Default.Port = port;
             Properties.Settings.Default.HostName = hostName;
             Properties.Settings.Default.UserName = userName;
-            Properties.Settings.Default.PassWord = passWord; 
+            Properties.Settings.Default.PassWord = passWord;
+            Properties.Settings.Default.pingDelay = pingDelay;
             Properties.Settings.Default.Save();
         }
 
@@ -58,6 +55,7 @@ namespace dotHackFragmentLobbyServer.Classes
             settings.Add(hostName);
             settings.Add(userName);
             settings.Add(passWord);
+            settings.Add(pingDelay);
             return settings;
         }
     }
