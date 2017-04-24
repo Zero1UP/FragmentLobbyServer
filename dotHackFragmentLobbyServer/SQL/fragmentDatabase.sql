@@ -24,9 +24,17 @@ CREATE TABLE Fragment.dbo.GuildMembers
 CREATE Table Fragment.dbo.Characters
 (
 	characterID INT IDENTITY(1,1) PRIMARY KEY,
+	characterSaveSlot INT,
+	characterSaveID VARCHAR(44),
 	characterName VARCHAR(15),
 	classID INT,
 	characterLevel INT,
+	characterGreeting VARCHAR(250),
+	characterHP INT,
+	characterSP INT,
+	characterGP INT,
+	characterOnlineGotCounter INT,
+	characterOfflineGotCounter INT,
 	status VARCHAR (8),
 	guildID INT,
 	Notes VARCHAR (120)
@@ -128,6 +136,12 @@ CREATE PROCEDURE GetAllCharacterInformation
 			characterName,
 			className,
 			characterLevel,
+			characterGreeting,
+			characterHP,
+			characterSP,
+			characterGP,
+			characterOnlineGotCounter,
+			characterOfflineGotCounter,
 			status,
 			guildName,
 			Notes
@@ -144,7 +158,7 @@ CREATE PROCEDURE GetAllCharacterInformation
 
 GO
 
---Stored Procedure for getting the list of information for a Characters
+--Stored Procedure for getting the list of information for a Character
 DROP PROCEDURE IF EXISTS GetCharacterInformation;
 
 GO
@@ -156,6 +170,12 @@ CREATE PROCEDURE GetCharacterInformation
 			characterName,
 			className,
 			characterLevel,
+			characterGreeting,
+			characterHP,
+			characterSP,
+			characterGP,
+			characterOnlineGotCounter,
+			characterOfflineGotCounter,
 			status,
 			guildName,
 			Notes
