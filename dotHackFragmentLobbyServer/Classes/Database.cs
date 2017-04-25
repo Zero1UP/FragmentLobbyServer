@@ -23,7 +23,6 @@ namespace dotHackFragmentLobbyServer.Classes
         //MySQL
         static MySqlConnection mySQLConnection;
         static MySqlCommand mySQLCommand;
-        static MySqlDataAdapter mySQLDataAdaptor;
         
 
 
@@ -95,7 +94,8 @@ namespace dotHackFragmentLobbyServer.Classes
                     msSQLDataAdaptor.SelectCommand = msSqlCommand;
                     msSQLDataAdaptor.Fill(DT);
 
-            }
+
+                }
                 else if (dbEngine == "MYSQL") //Using MY SQL Server
                 {
                     MySqlDataAdapter mySQLDataAdaptor = new MySqlDataAdapter();
@@ -105,6 +105,7 @@ namespace dotHackFragmentLobbyServer.Classes
                     mySQLDataAdaptor.SelectCommand = mySQLCommand;
                     mySQLDataAdaptor.Fill(DT);
                 }
+                Disconnect();
             }
             catch (Exception)
             {
@@ -112,8 +113,42 @@ namespace dotHackFragmentLobbyServer.Classes
                 throw;
             }
 
-            Disconnect();
+            
             return DT;
+        }
+
+        public static string GetScaler (string SQL)
+        {
+            string returnedData = "0";
+            try
+            {
+                Connect();
+                if (dbEngine == "MSSQL")
+                {
+                    SqlDataAdapter msSQLDataAdaptor = new SqlDataAdapter();
+                    msSqlCommand = new SqlCommand();
+                    msSqlCommand.Connection = msSqlConnection;
+                    msSqlCommand.CommandText = SQL;
+                    returnedData = (string)msSqlCommand.ExecuteScalar();
+                   
+                }
+                else if (dbEngine == "MYSQL") //Using MY SQL Server
+                {
+                    MySqlDataAdapter mySQLDataAdaptor = new MySqlDataAdapter();
+                    mySQLCommand = new MySqlCommand();
+                    mySQLCommand.Connection = mySQLConnection;
+                    mySQLCommand.CommandText = SQL;
+                    returnedData = (string)mySQLCommand.ExecuteScalar();
+                }
+
+                Disconnect();
+                return returnedData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
