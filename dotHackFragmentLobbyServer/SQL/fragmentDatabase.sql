@@ -211,3 +211,66 @@ CREATE PROCEDURE GetClassCount
 		Classes.classID = Characters.classID
 	GROUP BY className;
 GO
+
+--Stored Procedure for checking if a player exists
+DROP PROCEDURE IF EXISTS DoesCharacterExist;
+
+GO
+CREATE PROCEDURE DoesCharacterExist   
+  @characterSaveID VARCHAR(44)
+ AS   
+ 	SELECT 		
+			COUNT(characterID)
+	FROM 
+		Characters
+	WHERE 
+		characterSaveID =@characterSaveID;
+GO
+
+--Stored Procedure for inserting new characterData
+DROP PROCEDURE IF EXISTS InsertNewCharacter;
+
+GO
+CREATE PROCEDURE InsertNewCharacter
+	@characterSaveSlot INT,
+	@characterSaveID VARCHAR(44),
+	@characterName VARCHAR(15),
+	@classID INT,
+	@characterLevel INT,
+	@characterGreeting VARCHAR(250),
+	@characterHP INT,
+	@characterSP INT,
+	@characterGP INT,
+	@characterOnlineGotCounter INT,
+	@characterOfflineGotCounter INT
+ AS   
+	INSERT INTO Characters
+	(
+		characterSaveSlot,
+		characterSaveID,
+		characterName,
+		classID,
+		characterLevel,
+		characterGreeting,
+		characterHP,
+		characterSP,
+		characterGP,
+		characterOnlineGotCounter,
+		characterOfflineGotCounter
+	)
+	VALUES
+	(
+		@characterSaveSlot,
+		@characterSaveID,
+		@characterName,
+		@classID,
+		@characterLevel,
+		@characterGreeting,
+		@characterHP,
+		@characterSP,
+		@characterGP,
+		@characterOnlineGotCounter,
+		@characterOfflineGotCounter
+	)
+GO
+
