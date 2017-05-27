@@ -1,4 +1,4 @@
-This is a re-write of https://github.com/zeroKilo/AreaServerExplorerWV which was C# implementation of https://github.com/Lord-Ptolemy/lobbyemu
+This is a re-write of https://github.com/zeroKilo/FragmentServerWV which was C# implementation of https://github.com/Lord-Ptolemy/lobbyemu
 
 This is a private master server for the .hack Fragment PS2 game. 
 
